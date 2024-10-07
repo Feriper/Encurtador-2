@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encurtador de URL</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Encurtador de URL</h1>
+    <form id="urlForm">
+      <input type="text" id="longUrl" placeholder="Insira a URL longa" required>
+      <button type="submit">Encurtar URL</button>
+    </form>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('urlForm');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const longUrl = document.getElementById('longUrl').value;
+
+      const response = await fetch('/api/url/shorten', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ longUrl })
+      });
+
+      const data = await response.json();
+      if (data.shortUrl) {
+        resultDiv.innerHTML = `<p>URL encurtada: <a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a></p>`;
+      } else {
+        resultDiv.innerHTML = `<p>Erro: ${data}</p>`;
+      }
+    });
+  </script>
+</body>
+</html>
