@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-const DOMAIN = 'https://encurtador-2.vercel.app/'; // Substitua pelo seu domínio real
+const DOMAIN = 'https://encurtador-2.vercel.app/';
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
