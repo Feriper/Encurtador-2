@@ -50,7 +50,3 @@ app.get('/api/:shortUrl', async (req, res) => {
 
   res.status(404).json('URL not found');
 });
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
